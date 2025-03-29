@@ -1,0 +1,44 @@
+[ ca ]
+default_ca = CA_default
+
+[ CA_default ]
+dir       = /home/adminjai/projects/ca/ca/root
+database  = /home/adminjai/projects/ca/ca/root/index.txt
+new_certs_dir = /home/adminjai/projects/ca/certs/.temp
+certificate = /home/adminjai/projects/ca/ca/root/root_ca.crt
+serial    = /home/adminjai/projects/ca/ca/root/root_ca.srl
+private_key = /home/adminjai/projects/ca/ca/root/root_ca.key
+default_days = 3650
+default_md  = sha256
+policy    = policy_anything
+
+[ policy_anything ]
+countryName             = optional
+stateOrProvinceName     = optional
+localityName            = optional
+organizationName        = optional
+organizationalUnitName  = optional
+commonName              = supplied
+emailAddress            = optional
+
+[ req ]
+default_bits        = 4096
+distinguished_name  = req_distinguished_name
+string_mask = utf8only
+default_md = sha256
+x509_extensions = v3_ca
+
+[ req_distinguished_name ]
+countryName             = Country Name (2 letter code)
+stateOrProvinceName     = State or Province Name (full name)
+localityName            = Locality Name (eg, city)
+organizationName        = Organization Name (eg, company)
+organizationalUnitName  = Organizational Unit Name (eg, section)
+commonName              = Common Name (e.g. server FQDN or your name)
+emailAddress            = Email Address
+
+[ v3_ca ]
+basicConstraints        = critical, CA:TRUE
+keyUsage                = critical, keyCertSign, cRLSign
+subjectKeyIdentifier    = hash
+authorityKeyIdentifier  = keyid:always,issuer
